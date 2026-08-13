@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diana Ninsiima — Data Entry Specialist</title>
+<meta name="description" content="Diana Ninsiima, Data Entry Specialist. Accuracy & speed expert delivering precise, reliable, efficient data solutions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFF6F9;
+    --bg-alt:#FCE7EF;
+    --surface:rgba(255,255,255,.66);
+    --surface-solid:#FFFFFF;
+    --ink:#2B0E1D;
+    --muted:#93677C;
+    --line:#F4D3E1;
+    --teal:#C81E5C;
+    --teal-ink:#A1154A;
+    --amber:#E85D9A;
+    --teal-soft:rgba(200,30,92,.09);
+    --amber-soft:rgba(232,93,154,.12);
+    --shadow: 0 1px 2px rgba(43,14,29,.05), 0 8px 24px -12px rgba(43,14,29,.16);
+    --radius: 14px;
+    color-scheme: light;
+  }
+  [data-theme="dark"]{
+    --bg:#1B0A14;
+    --bg-alt:#22101B;
+    --surface:rgba(255,255,255,.05);
+    --surface-solid:#241019;
+    --ink:#FCEBF2;
+    --muted:#C99AB2;
+    --line:#3D1B2C;
+    --teal:#FF5C93;
+    --teal-ink:#FF8FB6;
+    --amber:#F2789F;
+    --teal-soft:rgba(255,92,147,.12);
+    --amber-soft:rgba(242,120,159,.14);
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 12px 32px -14px rgba(0,0,0,.6);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+  }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition: background .4s ease, color .4s ease;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif; letter-spacing:-0.02em; margin:0;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  img,svg{display:block;}
+  button{font-family:inherit;}
+  :focus-visible{outline:2px solid var(--teal); outline-offset:3px; border-radius:4px;}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  /* faint grid texture */
+  .grid-texture{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:.35;
+    -webkit-mask-image: radial-gradient(ellipse 80% 55% at 50% 0%, #000 40%, transparent 90%);
+            mask-image: radial-gradient(ellipse 80% 55% at 50% 0%, #000 40%, transparent 90%);
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    border-bottom:1px solid var(--line);
+    transition: background .4s ease, border-color .4s ease;
+  }
+  .navbar{ display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:600; font-size:1.02rem; text-decoration:none; }
+  .brand .cell{
+    width:34px; height:34px; border-radius:8px; display:grid; place-items:center;
+    background:var(--teal-soft); color:var(--teal-ink); border:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:600;
+  }
+  nav ul{ list-style:none; display:flex; gap:6px; margin:0; padding:0; }
+  nav a{
+    text-decoration:none; color:var(--muted); font-size:.88rem; font-weight:500;
+    padding:8px 12px; border-radius:8px; display:flex; align-items:center; gap:6px;
+    transition: color .25s ease, background .25s ease;
+  }
+  nav a .ref{ font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--teal); opacity:.75; }
+  nav a:hover{ color:var(--ink); background:var(--surface); }
+  .nav-right{ display:flex; align-items:center; gap:14px; }
+  .navlinks{ display:flex; }
+  @media (max-width:860px){ .navlinks{display:none;} }
+
+  .theme-toggle{
+    width:52px; height:30px; border-radius:999px; border:1px solid var(--line);
+    background:var(--surface); position:relative; cursor:pointer; padding:0;
+    display:flex; align-items:center;
+  }
+  .theme-toggle .knob{
+    position:absolute; top:2px; left:2px; width:24px; height:24px; border-radius:50%;
+    background:var(--teal); display:grid; place-items:center; color:#FFF6F9; font-size:12px;
+    transition: transform .35s cubic-bezier(.65,.05,.36,1);
+  }
+  [data-theme="dark"] .theme-toggle .knob{ transform:translateX(22px); }
+
+  .cta-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:.82rem; font-weight:500;
+    padding:10px 18px; border-radius:9px; border:1px solid transparent; cursor:pointer;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .cta-btn:hover{ transform:translateY(-2px); }
+  .cta-primary{ background:var(--teal); color:#FFF6F9; }
+  [data-theme="dark"] .cta-primary{ color:#2B0E1D; }
+  .cta-primary:hover{ box-shadow:0 10px 24px -8px var(--teal); }
+  .cta-ghost{ background:transparent; border-color:var(--line); color:var(--ink); }
+  .cta-ghost:hover{ background:var(--surface); border-color:var(--teal); }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{ position:relative; z-index:1; padding:120px 0; }
+  @media (max-width:640px){ section{ padding:80px 0; } }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:.78rem; letter-spacing:.06em;
+    color:var(--teal); display:flex; align-items:center; gap:10px; margin-bottom:18px;
+    text-transform:uppercase;
+  }
+  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--teal); display:block; }
+  .section-title{ font-size:clamp(1.9rem,3.4vw,2.7rem); font-weight:600; max-width:680px; }
+  .section-sub{ color:var(--muted); max-width:560px; margin-top:14px; font-size:1.02rem; line-height:1.6; }
+
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding-top:76px; padding-bottom:60px; }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+  @media (max-width:960px){ .hero-grid{ grid-template-columns:1fr; gap:52px; } }
+
+  .hero-eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:.82rem; color:var(--teal); letter-spacing:.05em; margin-bottom:22px; display:inline-flex; align-items:center; gap:10px; padding:6px 12px; border:1px solid var(--line); border-radius:999px; background:var(--surface); }
+  .hero-eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--teal); animation:blink 1.6s infinite; }
+  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:.25;} }
+
+  .hero h1{ font-size:clamp(2.6rem,6vw,4.4rem); line-height:1.03; font-weight:700; }
+  .hero h1 .accent{ color:var(--teal); }
+  .hero .role{ font-family:'IBM Plex Mono',monospace; font-size:1.05rem; color:var(--muted); margin-top:20px; }
+  .hero .role strong{ color:var(--ink); font-weight:600; }
+  .hero .tagline{ font-size:1.12rem; color:var(--muted); margin-top:16px; max-width:480px; line-height:1.65; }
+  .hero-ctas{ display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
+
+  .stat-row{ display:flex; gap:36px; margin-top:56px; flex-wrap:wrap; }
+  .stat b{ display:block; font-family:'Space Grotesk',sans-serif; font-size:2rem; font-weight:700; color:var(--ink); }
+  .stat span{ font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+
+  /* signature spreadsheet visual */
+  .sheet{
+    background:var(--surface-solid); border:1px solid var(--line); border-radius:16px;
+    box-shadow:var(--shadow); overflow:hidden; position:relative;
+  }
+  .sheet::before{
+    content:''; position:absolute; inset:-40px; z-index:-1; border-radius:40%;
+    background:radial-gradient(closest-side, var(--amber-soft), transparent 70%);
+    filter:blur(10px); pointer-events:none;
+  }
+  .sheet-bar{ display:flex; align-items:center; gap:10px; padding:10px 14px; border-bottom:1px solid var(--line); background:var(--bg-alt); }
+  .sheet-bar .fx{ font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--muted); }
+  .formula{ flex:1; font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:5px 10px; overflow:hidden; white-space:nowrap; }
+  .sheet-body{ display:grid; grid-template-columns:34px repeat(4,1fr); }
+  .colhead, .rowhead{ font-family:'IBM Plex Mono',monospace; font-size:.66rem; color:var(--muted); background:var(--bg-alt); display:flex; align-items:center; justify-content:center; padding:7px 0; border-bottom:1px solid var(--line); border-right:1px solid var(--line); }
+  .cell{ min-height:34px; border-bottom:1px solid var(--line); border-right:1px solid var(--line); display:flex; align-items:center; padding:0 10px; font-family:'IBM Plex Mono',monospace; font-size:.74rem; color:var(--ink); position:relative; transition:background .3s ease; }
+  .cell.active{ background:var(--teal-soft); }
+  .cell.check{ background:var(--amber-soft); }
+  .cell .caret{ display:inline-block; width:2px; height:14px; background:var(--teal); margin-left:2px; animation:caret 1s steps(1) infinite; }
+  @keyframes caret{ 50%{opacity:0;} }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:1fr 1.15fr; gap:64px; align-items:start; }
+  @media (max-width:900px){ .about-grid{ grid-template-columns:1fr; gap:40px; } }
+  .about-copy p{ color:var(--muted); line-height:1.8; font-size:1.03rem; margin:0 0 16px; }
+  .trait-cards{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:480px){ .trait-cards{ grid-template-columns:1fr; } }
+  .trait-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px; transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+  }
+  .trait-card:hover{ transform:translateY(-4px); border-color:var(--teal); box-shadow:var(--shadow); }
+  .trait-card .ic{ width:38px; height:38px; border-radius:9px; background:var(--teal-soft); display:grid; place-items:center; color:var(--teal-ink); margin-bottom:14px; }
+  .trait-card h3{ font-size:1rem; font-weight:600; margin-bottom:6px; }
+  .trait-card p{ margin:0; font-size:.88rem; color:var(--muted); line-height:1.55; }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:56px; }
+  @media (max-width:860px){ .skills-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .skills-grid{ grid-template-columns:1fr; } }
+  .skill-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:24px;
+    transition:border-color .3s ease, transform .3s ease;
+  }
+  .skill-card:hover{ transform:translateY(-3px); border-color:var(--teal); }
+  .skill-top{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; }
+  .skill-top h3{ font-size:.98rem; font-weight:600; }
+  .skill-top .pct{ font-family:'IBM Plex Mono',monospace; font-size:.85rem; color:var(--teal-ink); }
+  .bar-track{ height:8px; border-radius:5px; background:var(--bg-alt); border:1px solid var(--line); overflow:hidden; }
+  .bar-fill{ height:100%; width:0%; border-radius:5px; background:linear-gradient(90deg,var(--teal),var(--teal-ink)); transition:width 1.4s cubic-bezier(.2,.7,.2,1); }
+  .skill-card .note{ margin-top:10px; font-size:.8rem; color:var(--muted); }
+
+  /* ---------- PORTFOLIO ---------- */
+  .work-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:56px; }
+  @media (max-width:900px){ .work-grid{ grid-template-columns:1fr; } }
+  .work-card{
+    background:var(--surface-solid); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px; position:relative; overflow:hidden; min-height:260px; display:flex; flex-direction:column;
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .work-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow); border-color:var(--teal); }
+  .work-card .tag{ font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--teal-ink); background:var(--teal-soft); padding:4px 9px; border-radius:6px; width:fit-content; margin-bottom:16px; }
+  .work-card h3{ font-size:1.12rem; font-weight:600; margin-bottom:10px; }
+  .work-card p{ color:var(--muted); font-size:.9rem; line-height:1.6; margin:0 0 18px; flex:1; }
+  .tools{ display:flex; gap:8px; flex-wrap:wrap; }
+  .tools span{ font-family:'IBM Plex Mono',monospace; font-size:.68rem; padding:5px 9px; border:1px solid var(--line); border-radius:6px; color:var(--muted); }
+  .work-card .grid-mini{ position:absolute; right:-18px; bottom:-18px; opacity:.10; }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{ margin-top:56px; position:relative; padding-left:34px; }
+  .timeline::before{ content:''; position:absolute; left:6px; top:6px; bottom:6px; width:1px; background:var(--line); }
+  .t-item{ position:relative; padding-bottom:46px; }
+  .t-item:last-child{ padding-bottom:0; }
+  .t-item::before{ content:''; position:absolute; left:-34px; top:4px; width:13px; height:13px; border-radius:50%; background:var(--bg); border:2px solid var(--teal); }
+  .t-head{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; align-items:baseline; }
+  .t-head h3{ font-size:1.08rem; font-weight:600; }
+  .t-date{ font-family:'IBM Plex Mono',monospace; font-size:.76rem; color:var(--teal-ink); background:var(--teal-soft); padding:4px 10px; border-radius:6px; }
+  .t-org{ color:var(--muted); font-size:.9rem; margin-top:4px; }
+  .t-desc{ color:var(--muted); font-size:.92rem; line-height:1.6; margin-top:10px; max-width:600px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{ display:grid; grid-template-columns:.95fr 1.05fr; gap:56px; }
+  @media (max-width:900px){ .contact-grid{ grid-template-columns:1fr; } }
+  .social-row{ display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; }
+  .social-btn{
+    display:flex; align-items:center; gap:10px; padding:11px 16px; border:1px solid var(--line);
+    border-radius:10px; text-decoration:none; color:var(--ink); font-size:.88rem; background:var(--surface);
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .social-btn:hover{ border-color:var(--teal); transform:translateY(-2px); }
+
+  form{ display:flex; flex-direction:column; gap:16px; }
+  .field label{ display:block; font-size:.78rem; font-family:'IBM Plex Mono',monospace; color:var(--muted); margin-bottom:7px; }
+  .field input, .field textarea{
+    width:100%; background:var(--surface-solid); border:1px solid var(--line); border-radius:9px;
+    padding:12px 14px; color:var(--ink); font-family:'Inter',sans-serif; font-size:.94rem;
+    transition:border-color .25s ease, box-shadow .25s ease;
+  }
+  .field input:focus, .field textarea:focus{ border-color:var(--teal); box-shadow:0 0 0 3px var(--teal-soft); outline:none; }
+  .field textarea{ resize:vertical; min-height:120px; }
+  .send-status{ font-family:'IBM Plex Mono',monospace; font-size:.8rem; color:var(--teal-ink); min-height:18px; }
+
+  footer{ border-top:1px solid var(--line); padding:34px 0; }
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  .footer-row p{ margin:0; font-size:.82rem; color:var(--muted); }
+
+  .cta-band{ background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:52px; text-align:center; margin-top:60px; }
+  .cta-band h3{ font-size:clamp(1.5rem,2.6vw,2rem); margin-bottom:12px; }
+  .cta-band p{ color:var(--muted); margin-bottom:26px; }
+</style>
+</head>
+<body>
+
+<div class="grid-texture" aria-hidden="true"></div>
+
+<header>
+  <div class="wrap navbar">
+    <a href="#top" class="brand"><span class="cell">DN</span>Diana Ninsiima</a>
+    <nav class="navlinks">
+      <ul>
+        <li><a href="#about"><span class="ref">B1</span>About</a></li>
+        <li><a href="#skills"><span class="ref">C1</span>Skills</a></li>
+        <li><a href="#work"><span class="ref">D1</span>Work</a></li>
+        <li><a href="#experience"><span class="ref">E1</span>Experience</a></li>
+        <li><a href="#contact"><span class="ref">F1</span>Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><span class="knob" id="knob">☀</span></button>
+      <a href="#contact" class="cta-btn cta-primary">Contact Me</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-eyebrow"><span class="dot"></span> A1 &nbsp;·&nbsp; STATUS: AVAILABLE FOR WORK</div>
+        <h1>Diana <span class="accent">Ninsiima</span></h1>
+        <p class="role">Data Entry Specialist <span class="mono">|</span> <strong>Accuracy &amp; Speed Expert</strong></p>
+        <p class="tagline">Delivering precise, reliable, and efficient data solutions — from messy spreadsheets to clean, decision-ready datasets.</p>
+        <div class="hero-ctas">
+          <a href="#work" class="cta-btn cta-primary">View Work →</a>
+          <a href="#contact" class="cta-btn cta-ghost">Contact Me</a>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><b data-count="99.8" data-suffix="%">0%</b><span>Accuracy Rate</span></div>
+          <div class="stat"><b data-count="85" data-suffix=" wpm">0</b><span>Typing Speed</span></div>
+          <div class="stat"><b data-count="120" data-suffix="+">0</b><span>Projects Completed</span></div>
+        </div>
+      </div>
+
+      <div class="sheet reveal" id="heroSheet">
+        <div class="sheet-bar">
+          <span class="fx mono">fx</span>
+          <div class="formula" id="formulaBar" class="mono">=CLEAN(A2:A400)</div>
+        </div>
+        <div class="sheet-body" id="sheetBody">
+          <!-- generated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <div class="eyebrow">B1 · About</div>
+        <h2 class="section-title">Detail is the deliverable.</h2>
+      </div>
+      <div class="reveal about-copy">
+        <p>I'm a data entry specialist currently studying Software Engineering, with a habit of noticing the misspelled cell, the duplicate row, and the broken date format before anyone else does. I turn raw, scattered information into clean, structured, and reliable datasets — fast.</p>
+        <p>Comfortable across Excel, Google Sheets, and everyday data management systems, I care as much about the process (naming conventions, validation, backups) as the final output. If it can be organized, it can be trusted.</p>
+        <div class="trait-cards">
+          <div class="trait-card">
+            <div class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Attention to Detail</h3>
+            <p>Every row checked, every field validated before it's called done.</p>
+          </div>
+          <div class="trait-card">
+            <div class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Fast Typing Speed</h3>
+            <p>High words-per-minute output without sacrificing accuracy.</p>
+          </div>
+          <div class="trait-card">
+            <div class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 9h18M8 4v16" stroke="currentColor" stroke-width="1.6"/></svg>
+            </div>
+            <h3>Spreadsheet Tools</h3>
+            <p>Excel &amp; Google Sheets — formulas, pivot tables, formatting.</p>
+          </div>
+          <div class="trait-card">
+            <div class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h10M4 18h13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Data Systems</h3>
+            <p>Comfortable in CRMs, forms, and structured data management tools.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">C1 · Skillset</div>
+        <h2 class="section-title">Where the accuracy comes from.</h2>
+        <p class="section-sub">Core tools and abilities, kept sharp through daily use.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card reveal" data-level="97">
+          <div class="skill-top"><h3>Data Entry</h3><span class="pct">97%</span></div>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+          <p class="note">High-volume entry with near-zero error rate.</p>
+        </div>
+        <div class="skill-card reveal" data-level="95">
+          <div class="skill-top"><h3>Microsoft Excel</h3><span class="pct">95%</span></div>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+          <p class="note">Formulas, pivot tables, conditional formatting.</p>
+        </div>
+        <div class="skill-card reveal" data-level="93">
+          <div class="skill-top"><h3>Google Sheets</h3><span class="pct">93%</span></div>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+          <p class="note">Shared workflows, scripts, live dashboards.</p>
+        </div>
+        <div class="skill-card reveal" data-level="90">
+          <div class="skill-top"><h3>Data Cleaning</h3><span class="pct">90%</span></div>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+          <p class="note">De-duplication, formatting, validation rules.</p>
+        </div>
+        <div class="skill-card reveal" data-level="85">
+          <div class="skill-top"><h3>Typing Speed</h3><span class="pct">85 WPM</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--target:85%"></div></div>
+          <p class="note">Sustained speed without accuracy trade-offs.</p>
+        </div>
+        <div class="skill-card reveal" data-level="88">
+          <div class="skill-top"><h3>Attention to Detail</h3><span class="pct">88%</span></div>
+          <div class="bar-track"><div class="bar-fill"></div></div>
+          <p class="note">Catches inconsistencies before they ship.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">D1 · Work Log</div>
+        <h2 class="section-title">Sample projects.</h2>
+        <p class="section-sub">A few representative examples — swap these for your real project write-ups and screenshots.</p>
+      </div>
+      <div class="work-grid">
+        <div class="work-card reveal">
+          <span class="tag">ORGANIZATION</span>
+          <h3>Spreadsheet Restructure</h3>
+          <p>Rebuilt a disorganized 3,000-row inventory sheet into a clean, filterable master file with validated categories and consistent formatting.</p>
+          <div class="tools"><span>Excel</span><span>Pivot Tables</span><span>Data Validation</span></div>
+        </div>
+        <div class="work-card reveal">
+          <span class="tag">CLEANING</span>
+          <h3>Customer Database Cleanup</h3>
+          <p>Removed duplicates, standardized names and phone formats, and flagged incomplete records across a multi-source contact list.</p>
+          <div class="tools"><span>Google Sheets</span><span>Regex</span><span>De-dup</span></div>
+        </div>
+        <div class="work-card reveal">
+          <span class="tag">PROCESSING</span>
+          <h3>Survey &amp; Form Digitization</h3>
+          <p>Converted 500+ handwritten and PDF survey forms into a structured spreadsheet ready for analysis, with a full accuracy audit pass.</p>
+          <div class="tools"><span>Data Entry</span><span>QA Pass</span><span>Excel</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">E1 · Timeline</div>
+        <h2 class="section-title">Education &amp; experience.</h2>
+      </div>
+      <div class="timeline">
+        <div class="t-item reveal">
+          <div class="t-head"><h3>Software Engineering Student</h3><span class="t-date mono">Ongoing</span></div>
+          <div class="t-org">Currently studying</div>
+          <p class="t-desc">Building a technical foundation alongside data entry work — bringing an engineer's eye for structure and validation to everyday spreadsheets.</p>
+        </div>
+        <div class="t-item reveal">
+          <div class="t-head"><h3>Freelance Data Entry Specialist</h3><span class="t-date mono">Present</span></div>
+          <div class="t-org">Self-employed</div>
+          <p class="t-desc">Handling data entry, cleaning, and spreadsheet organization projects for clients — replace with your real client work.</p>
+        </div>
+        <div class="t-item reveal">
+          <div class="t-head"><h3>Data Entry Intern</h3><span class="t-date mono">Add dates</span></div>
+          <div class="t-org">Add organization name</div>
+          <p class="t-desc">Add a short description of your role, responsibilities, and impact here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <div class="eyebrow">F1 · Contact</div>
+          <h2 class="section-title">Let's work together!</h2>
+          <p class="section-sub">Have a dataset that needs cleaning, or a spreadsheet that's gotten out of hand? Send a message — I usually reply within a day.</p>
+          <div class="social-row">
+            <a class="social-btn" href="mailto:ninsiimadina37@gmail.com" aria-label="Email">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3z" stroke="currentColor" stroke-width="1.6"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.6"/></svg>
+              Email
+            </a>
+            <a class="social-btn" href="#" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><path d="M8 10v7M8 7.5v.01M12 17v-4.5c0-1.5 1-2.5 2.3-2.5S16 11 16 12.5V17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              LinkedIn
+            </a>
+            <a class="social-btn" href="https://wa.me/256782049799" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19l-4 1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              WhatsApp
+            </a>
+          </div>
+          <a href="#" class="cta-btn cta-ghost" style="margin-top:26px;" id="downloadCv">↓ Download CV</a>
+        </div>
+
+        <form id="contactForm" class="reveal" novalidate>
+          <div class="field">
+            <label for="name">A1 · Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="email">B1 · Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+          </div>
+          <div class="field">
+            <label for="message">C1 · Message</label>
+            <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+          </div>
+          <button type="submit" class="cta-btn cta-primary" style="width:fit-content;">Send Message</button>
+          <div class="send-status" id="sendStatus"></div>
+        </form>
+      </div>
+
+      <div class="cta-band reveal">
+        <h3>Ready to clean up your data?</h3>
+        <p>Let's work together — accurate, fast, and dependable.</p>
+        <a href="mailto:ninsiimadina37@gmail.com" class="cta-btn cta-primary">Say Hello →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <p>© <span id="year"></span> Diana Ninsiima. Built cell by cell.</p>
+    <p class="mono">A1:F999 · All rows accounted for</p>
+  </div>
+</footer>
+
+<script>
+  // ---- Theme toggle ----
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const knob = document.getElementById('knob');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let theme = prefersDark ? 'dark' : 'light';
+  applyTheme(theme);
+  toggle.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    applyTheme(theme);
+  });
+  function applyTheme(t){
+    if(t === 'dark'){ root.setAttribute('data-theme','dark'); knob.textContent = '☾'; }
+    else { root.removeAttribute('data-theme'); knob.textContent = '☀'; }
+  }
+
+  // ---- Year ----
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---- Scroll reveal ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if(en.isIntersecting){
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // ---- Animated counters ----
+  const counters = document.querySelectorAll('[data-count]');
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if(en.isIntersecting){
+        animateCounter(en.target);
+        counterIO.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterIO.observe(c));
+  function animateCounter(el){
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const isFloat = target % 1 !== 0;
+    let cur = 0;
+    const dur = 1400, start = performance.now();
+    function step(t){
+      const p = Math.min((t - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      cur = target * eased;
+      el.textContent = (isFloat ? cur.toFixed(1) : Math.round(cur)) + suffix;
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // ---- Animated skill bars ----
+  const skillCards = document.querySelectorAll('.skill-card');
+  const skillIO = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if(en.isIntersecting){
+        const fill = en.target.querySelector('.bar-fill');
+        const level = en.target.dataset.level + '%';
+        requestAnimationFrame(() => { fill.style.width = level; });
+        skillIO.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  skillCards.forEach(c => skillIO.observe(c));
+
+  // ---- Hero spreadsheet signature animation ----
+  const cols = ['', 'A', 'B', 'C', 'D'];
+  const rows = 7;
+  const sheetBody = document.getElementById('sheetBody');
+  const sampleData = ['Amara K.', '248', 'VERIFIED', '19.99', 'Nabbanja', '512', 'PENDING', '42.10', 'Okello P.', '87', 'VERIFIED', '5.50', 'Kato R.', '301', 'VERIFIED', '11.25'];
+  let dataPtr = 0;
+
+  function buildSheet(){
+    let html = '<div class="colhead"></div>';
+    cols.slice(1).forEach(c => html += `<div class="colhead">${c}</div>`);
+    for(let r = 1; r <= rows; r++){
+      html += `<div class="rowhead">${r}</div>`;
+      for(let c = 1; c <= 4; c++){
+        html += `<div class="cell" data-r="${r}" data-c="${c}"></div>`;
+      }
+    }
+    sheetBody.innerHTML = html;
+  }
+  buildSheet();
+
+  const formulas = ['=CLEAN(A2:A400)', '=VLOOKUP(B2,Data,3,0)', '=TRIM(PROPER(A2))', '=IFERROR(C2,"—")', '=COUNTIF(D:D,"VERIFIED")'];
+  let fIdx = 0;
+  const formulaBar = document.getElementById('formulaBar');
+
+  function typeInto(cellEl, text, cls){
+    cellEl.classList.add('active');
+    if(cls) cellEl.classList.add(cls);
+    let i = 0;
+    cellEl.innerHTML = '<span class="txt"></span><span class="caret"></span>';
+    const txt = cellEl.querySelector('.txt');
+    const timer = setInterval(() => {
+      txt.textContent = text.slice(0, i + 1);
+      i++;
+      if(i >= text.length){
+        clearInterval(timer);
+        setTimeout(() => { cellEl.querySelector('.caret')?.remove(); }, 400);
+      }
+    }, 45);
+  }
+
+  let cellCycle = [];
+  for(let r = 1; r <= rows; r++){ for(let c = 1; c <= 4; c++){ cellCycle.push([r,c]); } }
+  let cyclePtr = 0;
+
+  function tick(){
+    // fade previous active cell's highlight slowly (keep content)
+    const [r,c] = cellCycle[cyclePtr % cellCycle.length];
+    const cell = sheetBody.querySelector(`.cell[data-r="${r}"][data-c="${c}"]`);
+    if(cell){
+      const text = sampleData[dataPtr % sampleData.length];
+      dataPtr++;
+      const isCheck = text === 'VERIFIED';
+      cell.classList.remove('active','check');
+      typeInto(cell, text, isCheck ? 'check' : null);
+    }
+    cyclePtr++;
+    if(cyclePtr % 4 === 0){
+      formulaBar.textContent = formulas[fIdx % formulas.length];
+      fIdx++;
+    }
+  }
+  setInterval(tick, 900);
+  tick();
+
+  // ---- Contact form (front-end only demo) ----
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('sendStatus');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if(!form.checkValidity()){
+      status.textContent = 'Please fill in all fields.';
+      status.style.color = 'var(--amber)';
+      return;
+    }
+    status.style.color = 'var(--teal-ink)';
+    status.textContent = 'Sending...';
+    setTimeout(() => {
+      status.textContent = '✓ Message queued — connect a form backend (e.g. Formspree) to make this live.';
+      form.reset();
+    }, 900);
+  });
+
+  // ---- Download CV placeholder ----
+  document.getElementById('downloadCv').addEventListener('click', (e) => {
+    e.preventDefault();
+    alert('Add a link to your real CV file on this button (href="your-cv.pdf" with the download attribute).');
+  });
+</script>
+</body>
+</html>
